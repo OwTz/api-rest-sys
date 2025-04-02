@@ -2,20 +2,25 @@ package me.owtz.sys.models;
 
 public class Card {
 
+    private Long id;
     private String number;
-    private int pass;
+    private Double limit;
 
     // Construtor padrão
     public Card() {
     }
 
-    // Construtor com todos os campos
-    public Card(String number, int pass) {
-        this.number = number;
-        this.pass = pass;
-    }
 
     // Getters e Setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getNumber() {
         return number;
     }
@@ -24,20 +29,11 @@ public class Card {
         this.number = number;
     }
 
-    public int getPass() {
-        return pass;
+    public Double getLimit() {
+        return limit;
     }
 
-    public void setPass(int pass) {
-        this.pass = pass;
-    }
-
-    @Override
-    public String toString() {
-        // Cuidado ao imprimir senhas em logs reais
-        return "Card{" +
-                "number='" + (number != null ? number.replaceAll("\\d(?=\\d{4})", "x") : "null") + '\'' + // Mascara simples
-                ", pass=****" +
-                '}';
+    public void setLimit(Double limit) {
+        this.limit = limit;
     }
 }

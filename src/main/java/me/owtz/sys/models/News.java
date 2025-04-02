@@ -1,8 +1,6 @@
 package me.owtz.sys.models;
 
-public class Features {
-
-
+public class News {
     private Long id;
     private String icon;
     private String description;
