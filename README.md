@@ -4,20 +4,39 @@
 
 ```
 classDiagram
-  class Account {
-    +String id
-    +String userName
-    +String userAccount
-    +String userAgency
-  }
+    class User {
+        +String name
+        +Account account
+        +Feature[] features
+        +Card card
+        +News[] news
+    }
 
-  class Features {
-    +String icon
-    +String propiets
-  }
+    class Account {
+        +String number
+        +String agency
+        +float balance
+        +float limit
+    }
 
-  class Card {
-    +String number
-    +int pass
-  }
+    class Feature {
+        +String icon
+        +String description
+    }
+
+    class Card {
+        +String number
+        +float limit
+    }
+
+    class News {
+        +String icon
+        +String description
+    }
+
+    User --> Account
+    User --> Feature : has many
+    User --> Card
+    User --> News : has many
+
 ```
