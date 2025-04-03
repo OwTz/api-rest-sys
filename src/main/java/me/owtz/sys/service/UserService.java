@@ -1,12 +1,11 @@
 package me.owtz.sys.service;
 
-import me.owtz.sys.repository.QueryUser;
-import org.springframework.beans.factory.annotation.Autowired;
+import me.owtz.sys.domain.models.User;
 
-public class UserService {
+public interface UserService {
+    User findById(Long id);
 
-    @Autowired
-    QueryUser queryUser;
+    User create(User userToCreate);
 
-
+    Boolean existsByAccountNumber(String number);
 }

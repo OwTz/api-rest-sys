@@ -1,6 +1,6 @@
-package me.owtz.sys.repository;
+package me.owtz.sys.domain.repository;
 
-import me.owtz.sys.models.User;
+import me.owtz.sys.domain.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

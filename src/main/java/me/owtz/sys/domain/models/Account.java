@@ -1,4 +1,4 @@
-package me.owtz.sys.models;
+package me.owtz.sys.domain.models;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
