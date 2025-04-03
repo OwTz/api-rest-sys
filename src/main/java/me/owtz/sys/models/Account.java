@@ -3,9 +3,11 @@ package me.owtz.sys.models;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
-@Entity(name = "tb_user")
+@Entity
+@Table(name = "tb_account")
 public class Account {
 
     @Id
@@ -15,30 +17,44 @@ public class Account {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "account")
+    @ManyToOne
+    @JoinColumn(name = "account_id")
     private Account account;
 
-    @Column(name = "features")
+    @Column(precision = 15, scale = 2)
+    private BigDecimal balance;
+
+    @Column(unique = true)
+    private String numberAccount;
+
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Features> features;
 
-    @Column(name = "card")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "card_id", referencedColumnName = "id")
     private Card card;
 
 
-    @Column(name = "news")
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<News> news;
+
+    @Column(name = "additional_limit", precision = 13, scale = 2)
+    private BigDecimal limit;
 
     // Construtor padrão
     public Account() {
     }
 
-    // Construtor com todos os campos
-    public Account(String id, String userName, String userAccount, String userAgency) {
-
+    public Account(Long id, String name, Account account, BigDecimal balance, String numberAccount, List<Features> features, Card card, List<News> news) {
+        this.id = id;
+        this.name = name;
+        this.account = account;
+        this.balance = balance;
+        this.numberAccount = numberAccount;
+        this.features = features;
+        this.card = card;
+        this.news = news;
     }
-
-    // Getters e Setters
-
 
     public Long getId() {
         return id;
@@ -62,6 +78,22 @@ public class Account {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public String getNumberAccount() {
+        return numberAccount;
+    }
+
+    public void setNumberAccount(String numberAccount) {
+        this.numberAccount = numberAccount;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
     }
 
     public List<Features> getFeatures() {
@@ -88,15 +120,6 @@ public class Account {
         this.news = news;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", account=" + account +
-                ", features=" + features +
-                ", card=" + card +
-                ", news=" + news +
-                '}';
-    }
+
+
 }
