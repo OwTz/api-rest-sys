@@ -1,60 +1,33 @@
 package me.owtz.sys.models;
-
-
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-@Entity
-@Table(name = "tb_account")
+@Entity(name = "accounts")
 public class Account {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(nullable = false, unique = true)
+    private String number;
 
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
+    @Column(nullable = false)
+    private String agency;
 
-    @Column(precision = 15, scale = 2)
+    @Column(precision = 13, scale = 2)
     private BigDecimal balance;
 
-    @Column(unique = true)
-    private String numberAccount;
-
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Features> features;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "card_id", referencedColumnName = "id")
-    private Card card;
-
-
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<News> news;
-
-    @Column(name = "additional_limit", precision = 13, scale = 2)
+    @Column(name = "additional_limit", precision = 13, scale = 2, nullable = false)
     private BigDecimal limit;
 
-    // Construtor padrão
-    public Account() {
-    }
-
-    public Account(Long id, String name, Account account, BigDecimal balance, String numberAccount, List<Features> features, Card card, List<News> news) {
-        this.id = id;
-        this.name = name;
-        this.account = account;
-        this.balance = balance;
-        this.numberAccount = numberAccount;
-        this.features = features;
-        this.card = card;
-        this.news = news;
-    }
+//    public Account(Long id, String number, String agency, BigDecimal balance, BigDecimal limit) {
+//        this.id = id;
+//        this.number = number;
+//        this.agency = agency;
+//        this.balance = balance;
+//        this.limit = limit;
+//    }
 
     public Long getId() {
         return id;
@@ -64,28 +37,20 @@ public class Account {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNumber() {
+        return number;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public Account getAccount() {
-        return account;
+    public String getAgency() {
+        return agency;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public String getNumberAccount() {
-        return numberAccount;
-    }
-
-    public void setNumberAccount(String numberAccount) {
-        this.numberAccount = numberAccount;
+    public void setAgency(String agency) {
+        this.agency = agency;
     }
 
     public BigDecimal getBalance() {
@@ -96,30 +61,11 @@ public class Account {
         this.balance = balance;
     }
 
-    public List<Features> getFeatures() {
-        return features;
+    public BigDecimal getLimit() {
+        return limit;
     }
 
-    public void setFeatures(List<Features> features) {
-        this.features = features;
+    public void setLimit(BigDecimal limit) {
+        this.limit = limit;
     }
-
-    public Card getCard() {
-        return card;
-    }
-
-    public void setCard(Card card) {
-        this.card = card;
-    }
-
-    public List<News> getNews() {
-        return news;
-    }
-
-    public void setNews(List<News> news) {
-        this.news = news;
-    }
-
-
-
 }

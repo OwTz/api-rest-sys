@@ -2,30 +2,27 @@ package me.owtz.sys.models;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity(name = "tb_card")
 public class Card {
 
+
     @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "number")
+    @Column(unique = true)
     private String number;
 
-    @Column(name = "avalible_limit", scale = 2, precision = 2)
-    private Double limit;
+    @Column(name = "available_limit", precision = 13, scale = 2, nullable = false)
+    private BigDecimal limit;
 
-
-    @Column(name = "user")
-    private User user;
-
-    // Construtor padrão
-    public Card() {
-    }
-
-
-
-    // Getters e Setters
+//    public Card(Long id, String number, BigDecimal limit) {
+//        this.id = id;
+//        this.number = number;
+//        this.limit = limit;
+//    }
 
     public Long getId() {
         return id;
@@ -43,11 +40,11 @@ public class Card {
         this.number = number;
     }
 
-    public Double getLimit() {
+    public BigDecimal getLimit() {
         return limit;
     }
 
-    public void setLimit(Double limit) {
+    public void setLimit(BigDecimal limit) {
         this.limit = limit;
     }
 }
